@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vems"
-version = "0.1.27"
+version = "0.1.28"
 description = "Everyday Python utilities: encoding-safe CSV reading, script logging, and finish notifications."
 readme = "README.md"
 dependencies = [ "pyarrow", "polars", "xlwings", "pandas", "plyer",]
