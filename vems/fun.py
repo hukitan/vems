@@ -5,6 +5,8 @@ import os
 import sys
 from datetime import datetime
 from logging.handlers import TimedRotatingFileHandler
+import platform
+import subprocess
 
 import pandas as pd
 import polars as pl
@@ -264,3 +266,25 @@ def normalizar_llave_pl(df, col):
 def normalizar_llave_pd(serie):
     """Estandariza una columna llave (pandas): string, sin espacios, mayúsculas."""
     return serie.astype(str).str.strip().str.upper()
+
+def abrir_carpeta(ruta):
+    """
+    Abre la carpeta indicada en el explorador de archivos del sistema.
+    Compatible con Windows, macOS y Linux.
+    """
+    if not os.path.exists(ruta):
+        raise FileNotFoundError(f"La ruta no existe: {ruta}")
+    if not os.path.isdir(ruta):
+        raise NotADirectoryError(f"No es una carpeta: {ruta}")
+
+    sistema = platform.system()
+
+    try:
+        if sistema == "Windows":
+            os.startfile(ruta)  # Solo en Windows
+        elif sistema == "Darwin":  # macOS
+            subprocess.run(["open", ruta])
+        else:  # Linux y otros Unix
+            subprocess.run(["xdg-open", ruta])
+    except Exception as e:
+        print(f"Error al abrir la carpeta: {e}")
