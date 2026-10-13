@@ -11,7 +11,8 @@ from .fun import (
     es_script_puro,
     leer_csv_seguro2tx,
     normalizar_llave_pl,
-    normalizar_llave_pd
+    normalizar_llave_pd,
+    abrir_carpeta
 
 
 )
